@@ -605,7 +605,7 @@ search box - the end user will not know they are happening.
                 var filters = options.facets;
                 var thefilters = '';
                 for ( var idx = 0; idx < filters.length; idx++ ) {
-                    var _filterTmpl = '<table id="facetview_{{FILTER_NAME}}" class="facetview_filters table table-bordered table-condensed table-striped" style="display:none;"> \
+                    var _filterTmpl = '<table id="facetview_{{FILTER_NAME}}" class="facetview_filters table table-bordered" style="display:none;"> \
                         <tr><td><a class="facetview_filtershow" title="filter by {{FILTER_DISPLAY}}" rel="{{FILTER_NAME}}" \
                         style="color:#333; font-weight:bold;" href=""><i class="icon-plus"></i> {{FILTER_DISPLAY}} \
                         </a> \
