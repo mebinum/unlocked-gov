@@ -152,5 +152,13 @@ color: #d6dbdf;
 box-shadow: none;
 }
 
+.facetview_filters.table td > a {
+  display: block;
+}
+
+.facetview_filters .btn {
+  color: #34495e;
+}
+
 
 .media-object { width: 64px; height: 64px; padding-bottom: 30px }

@@ -90,6 +90,7 @@ jQuery(document).ready(function($) {
         histogram_data.push({term: entry.time, count: entry.total});
       }
       Timeline('graph-timeline').data(histogram_data).draw();
+      console.log(sdata);
     }
   });
   // set up form
@@ -155,7 +156,7 @@ var Timeline = function(dom_id) {
                        last.getFullYear()
                      ].join("/");
              })
-            .textStyle("#B1B1B1")
+            .textStyle("#B1B1B1");
 
          vis.add(pv.Rule)                               // Add the X-ticks
             .data(entries)
@@ -351,6 +352,5 @@ var Donut = function(dom_id) {
     };
 
 };
-
 /* Create HTML5 element for IE */
 document.createElement("section");
