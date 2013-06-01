@@ -257,6 +257,7 @@ var Timeline = function(dom_id) {
              })
             .textStyle("#B1B1B1");
 
+         var labelEvery = Math.floor(entries.length / 10);
          vis.add(pv.Rule)                               // Add the X-ticks
             .data(entries)
             .visible(function(d) {return d.term;})
@@ -264,13 +265,19 @@ var Timeline = function(dom_id) {
             .bottom(-15)
             .height(15)
             .strokeStyle("#33A3E1")
+            .width(0)
 
             .anchor("right").add(pv.Label)              // Add the tick label (DD/MM)
             .text(function(d) {
+              if (entries.indexOf(d) % labelEvery != 0) {
+                return "";
+              }
+
                  var date = new Date(d.term); 
                  return [
                      date.getDate(),
-                     date.getMonth() + 1
+                     date.getMonth() + 1,
+                     date.getFullYear()
                  ].join('/');
              })
             .textStyle("#2C90C8")
