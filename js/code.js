@@ -19,6 +19,22 @@ jQuery(document).ready(function($) {
         {'field':'offense_category', 'display': 'Offense Category'}, 
         {'field':'subcategory', 'display': 'Sub Category'}
     ],
+    extra_facets: 
+      {
+        "stats_count": {
+          "statistical" : {
+            "field" : "t_count"
+          }
+        }, 
+        "histo1" : {
+            "date_histogram" : {
+                "field" : "event_date",
+                "value_field" : "t_count",
+                "interval" : "month"
+            }
+        }
+      }
+    ,
     searchwrap_start: '<table class="table table-striped table-bordered" id="facetview_results"><thead><tr><td></td><td>Date</td><td>State</td><td>Area</td><td>LGA</td><td>Offense Category</td><td>Sub Category</td><td>Count</td></tr></thead><tbody>',
     searchwrap_end: '</tbody></table>',
     result_display: [
@@ -66,7 +82,14 @@ jQuery(document).ready(function($) {
     },
     on_results_returned: function(sdata) {
       Donut('graph-area').data(sdata.facets.area.terms).draw();
-      Timeline('graph-timeline').data(sdata.facets.event_date.terms).draw();
+      // Transform from enties {} to terms {term: , count: }
+      var histogram_data = [];
+      for (var i = 0; i < sdata.facets.histo1.entries.length; i++) {
+        var entry = sdata.facets.histo1.entries[i];
+        histogram_data.push({term: entry.time, count: entry.total / 100});
+      }
+      Timeline('graph-timeline').data(histogram_data).draw();
+      console.log(sdata);
       Mapper('map').data(sdata.hits.hits).drawMap();
     }
   });
@@ -186,9 +209,9 @@ var Timeline = function(dom_id) {
          vis.add(pv.Label)                              // Add the chart legend at top left
             .top(-20)
             .text(function() {
-                 var first = new Date(entries[0].time);
-                 var last  = new Date(entries[entries.length-2].time);
-                 return "Articles published between " +
+                 var first = new Date(entries[0].term);
+                 var last  = new Date(entries[entries.length-2].term);
+                 return "Crimes committed between " +
                      [ first.getDate(),
                        first.getMonth() + 1,
                        first.getFullYear()
@@ -205,7 +228,7 @@ var Timeline = function(dom_id) {
 
          vis.add(pv.Rule)                               // Add the X-ticks
             .data(entries)
-            .visible(function(d) {return d.time;})
+            .visible(function(d) {return d.term;})
             .left(function() { return x(this.index); })
             .bottom(-15)
             .height(15)
@@ -213,7 +236,7 @@ var Timeline = function(dom_id) {
 
             .anchor("right").add(pv.Label)              // Add the tick label (DD/MM)
             .text(function(d) {
-                 var date = new Date(d.time);
+                 var date = new Date(d.term); 
                  return [
                      date.getDate(),
                      date.getMonth() + 1
