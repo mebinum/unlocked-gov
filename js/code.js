@@ -153,31 +153,21 @@ var Mapper = function (dom_id) {
         var aloc = locations[0];
         var mapOptions = {
           center: new google.maps.LatLng(aloc[0], aloc[1]),
-          zoom: 8,
+          zoom: 10,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
-        var map = new google.maps.Map(document.getElementById(dom_id), mapOptions);
-        //var map = L.mapbox.map('map', 'mebinum.map-023ictet').setView(aloc, 5);
-        // new L.map(dom_id).setView(aloc, 5);
-        // var jsonp = 'http://a.tiles.mapbox.com/v3/mebinum.map-wu6wsgk4.jsonp';
-
-        // wax.tilejson(jsonp, function(tilejson) {
-        //     map.addLayer(new wax.leaf.connector(tilejson));
-        // });
-        // // add an OpenStreetMap tile layer
-        // L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-        //         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        // }).addTo(map);
+        var mapEl = document.getElementById(dom_id);
+        var map = new google.maps.Map(mapEl, mapOptions);
+        var markers = [];
         locations.map(function (point) {
             // add a marker in the given location, attach some popup content to it and open the popup
-            console.log("point");
-            console.log(point);
             var latlong = new google.maps.LatLng(point[0],point[1]);
-            var marker = new google.maps.Marker({
-                position: latlong,
-                map: map
-             });
+            var marker = new google.maps.Marker({position: latlong});
+            markers.push(marker);
         });
+        var mcOptions = {gridSize: 30, maxZoom: 19};
+        var mc = new MarkerClusterer(map, markers, mcOptions);
+        mapEl.setAttribute("style","min-height:330px;max-height:330px");
     };
 
     return {
