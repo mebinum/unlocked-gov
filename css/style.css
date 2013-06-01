@@ -39,6 +39,9 @@
 
 #logo {
   border: 0;
+  background: url('../images/unlocked_gov.png') no-repeat 0 5px ;
+  background-size: 25px;
+  margin-left: 25px;
 }
 
 a.logo{
@@ -55,25 +58,52 @@ a.logo{
     padding: 100px 0;
 }
 
-#home { 
-	background: url(../images/home.jpg) 50% 0 fixed; 
-	height: auto;  
-	margin: 0 auto; 
-    width: 100%; 
-    position: relative; 
-    box-shadow: 0 0 50px rgba(0,0,0,0.8);
-    padding: 200px 0;
+/*main app body*/
+#ul-main {
+
 }
-#about { 
-	background-position: 50% 0;
-    background-attachment: fixed; 
-	height: auto;
-	margin: 0 auto; 
-    width: 100%; 
-    position: relative; 
-    box-shadow: 0 0 50px rgba(0,0,0,0.8);
-    padding: 100px 0;
-    color: #fff;
+
+#ul-main table{
+  *border-collapse: collapse; /* IE7 and lower */
+    border-spacing: 0; 
+}
+
+#ul-main tbody:first-child {
+    -moz-border-radius: 6px 0 0 0;
+    -webkit-border-radius: 6px 0 0 0;
+    border-radius: 6px 0 0 0;
+}
+
+#ul-main tbody:last-child {
+    -moz-border-radius: 0 6px 0 0;
+    -webkit-border-radius: 0 6px 0 0;
+    border-radius: 0 6px 0 0;
+}
+
+#ul-main tbody:only-child{
+    -moz-border-radius: 6px 6px 0 0;
+    -webkit-border-radius: 6px 6px 0 0;
+    border-radius: 6px 6px 0 0;
+}
+
+
+/* Sidenav
+-------------------------------------------------- */
+
+ .ul-sidenav {
+  margin: 20px 0 0;
+  padding: 0;
+  background-color: #fff;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+  -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.065);
+     -moz-box-shadow: 0 1px 4px rgba(0,0,0,.065);
+          box-shadow: 0 1px 4px rgba(0,0,0,.065);
+}
+
+.main-row{
+  padding-left: 20px;
 }
 
 /* Non-essential demo stuff */

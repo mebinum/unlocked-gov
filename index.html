@@ -22,11 +22,11 @@
 <body>
     <div class="navbar-wrapper">
       <!-- Wrap the .navbar in .container to center it within the absolutely positioned parent. -->
-      <div class="container">
+      <div class="">
 
         <div class="navbar navbar-inverse">
             <div class="navbar-inner">
-              <div class="container">
+              <div class="">
                  <a id="logo" class="brand logo" href="/">Unlocked.Gov</a>
                 <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target="#nav-collapse-01"></button>
                 <div class="nav-collapse collapse" id="nav-collapse-01">
@@ -70,35 +70,16 @@
     </div>
 
     <!-- Section #1 -->
-    <section id="intro" data-speed="6" data-type="background">
-        <div id="map" class="container">
-            <div class="hero-unit">
-                <h2>This will be the place holder for the maps</h2>
-
-            </div>
+    <section id="intro" data-speed="6" data-type="background" class="container-fluid">
+        <div class="main-row row-fluid">
+        <div class="span11 ">
+        <!--Body content-->
+          
+         <section id="ul-main">
+             <div class="facet-view-simple"></div>
+         </section>>
+          
         </div>
-    </section>
-
-    <!-- Section #2 -->
-    <section id="home" data-speed="4" data-type="background">
-        <div class="container">
-            <div class="row-fluid">
-                <div class="span4 well">
-                  <h2>Heading</h2>
-                  <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque cursus nisl consectetur et.</p>
-                  <p><a class="btn btn-success" href="#">View details &raquo;</a></p>
-                </div><!-- /.span4 -->
-                <div class="span4 well">
-                  <h2>Heading</h2>
-                  <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-                  <p><a class="btn btn-success" href="#">View details &raquo;</a></p>
-                </div><!-- /.span4 -->
-                <div class="span4 well">
-                  <h2>Heading</h2>
-                  <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum odio, dapibus ac in, massa justo sit amet.</p>
-                  <p><a class="btn btn-success" href="#">View details &raquo;</a></p>
-                </div><!-- /.span4 -->
-            </div>
         </div>
     </section>
 
@@ -185,6 +166,9 @@
     <script src="js/jquery.tagsinput.js"></script>
     <script src="js/jquery.placeholder.js"></script>
     <script src="js/jquery.stacktable.js"></script>
+    <script type="text/javascript" src="linkify/1.0/jquery.linkify-1.0-min.js"></script>
+    <script type="text/javascript" src="js/jquery.facetview.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <script src="js/code.js"></script>
 </body>
  
