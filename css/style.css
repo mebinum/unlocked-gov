@@ -108,8 +108,9 @@ a.logo{
   text-transform: capitalize;
 }
 
-#map {width:100%; }
-
+#map {width:100%;}
+#map img {max-width: none;}
+#map label {width: auto; display:inline;}
 /*override plus icon*/
 #facetview_rightcol .facetview_sharesave, #facetview_rightcol .facetview_freetext {
   margin-top: 3px !important;
