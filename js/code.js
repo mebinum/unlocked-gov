@@ -19,6 +19,22 @@ jQuery(document).ready(function($) {
         {'field':'offense_category', 'display': 'Offense Category'}, 
         {'field':'subcategory', 'display': 'Sub Category'}
     ],
+    extra_facets: 
+      {
+        "stats_count": {
+          "statistical" : {
+            "field" : "t_count"
+          }
+        }, 
+        "histo1" : {
+            "date_histogram" : {
+                "field" : "event_date",
+                "value_field" : "t_count",
+                "interval" : "month"
+            }
+        }
+      }
+    ,
     searchwrap_start: '<table class="table table-striped table-bordered" id="facetview_results"><thead><tr><td></td><td>Date</td><td>State</td><td>Area</td><td>LGA</td><td>Offense Category</td><td>Sub Category</td><td>Count</td></tr></thead><tbody>',
     searchwrap_end: '</tbody></table>',
     result_display: [
@@ -66,7 +82,14 @@ jQuery(document).ready(function($) {
     },
     on_results_returned: function(sdata) {
       Donut('graph-area').data(sdata.facets.area.terms).draw();
-      Timeline('graph-timeline').data(sdata.facets.event_date.terms).draw();
+
+      // Transform from enties {} to terms {term: , count: }
+      var histogram_data = [];
+      for (var i = 0; i < sdata.facets.histo1.entries.length; i++) {
+        var entry = sdata.facets.histo1.entries[i];
+        histogram_data.push({term: entry.time, count: entry.total});
+      }
+      Timeline('graph-timeline').data(histogram_data).draw();
     }
   });
   // set up form
