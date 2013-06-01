@@ -12,11 +12,27 @@
 }
 
 /* Remove border and change up box shadow for more contrast */
+#nav-collapse-01 a {
+  border-width: 0px;
+  color: #fff;
+}
+
+#nav-collapse-01 a:hover{
+  color:#16a085;
+}
+
 .navbar .navbar-inner {
   border: 0;
   -webkit-box-shadow: 0 2px 10px rgba(0,0,0,.25);
      -moz-box-shadow: 0 2px 10px rgba(0,0,0,.25);
           box-shadow: 0 2px 10px rgba(0,0,0,.25);
+}
+
+.navbar-inverse .nav-collapse .nav > li > a:hover, 
+.navbar-inverse .nav-collapse .nav > li > a:focus, 
+.navbar-inverse .nav-collapse .dropdown-menu a:hover, 
+.navbar-inverse .nav-collapse .dropdown-menu a:focus {
+background-color: #f2f2f2;
 }
 
 /* Downsize the brand/project name a bit */
@@ -59,32 +75,6 @@ a.logo{
 }
 
 /*main app body*/
-#ul-main {
-
-}
-
-#ul-main table{
-  *border-collapse: collapse; /* IE7 and lower */
-    border-spacing: 0; 
-}
-
-#ul-main tbody:first-child {
-    -moz-border-radius: 6px 0 0 0;
-    -webkit-border-radius: 6px 0 0 0;
-    border-radius: 6px 0 0 0;
-}
-
-#ul-main tbody:last-child {
-    -moz-border-radius: 0 6px 0 0;
-    -webkit-border-radius: 0 6px 0 0;
-    border-radius: 0 6px 0 0;
-}
-
-#ul-main tbody:only-child{
-    -moz-border-radius: 6px 6px 0 0;
-    -webkit-border-radius: 6px 6px 0 0;
-    border-radius: 6px 6px 0 0;
-}
 
 
 /* Sidenav
@@ -111,4 +101,56 @@ a.logo{
 	background-color: #fff;
     box-shadow: 0 0 20px rgba(0,0,0,0.1);
 }
+
+/*facet view filters*/
+.facetview_filters  a {
+  text-decoration: none;
+  text-transform: capitalize;
+}
+
+/*override plus icon*/
+#facetview_rightcol .facetview_sharesave, #facetview_rightcol .facetview_freetext {
+  margin-top: 3px !important;
+  margin-bottom: 0px !important;
+}
+#facetview_rightcol .facetview_freetext{
+  margin-left: 5px;
+}
+#facetview_rightcol .facetview_freetext {
+  width: 63%;
+}
+
+.facetview_metadata .pagination ul{
+  background-color: #34495e !important;
+}
+.facetview_metadata .pagination ul li.active > a, 
+.facetview_metadata .pagination ul li.active > span,
+.facetview_metadata .pagination ul li > a, .facetview_metadata .pagination ul li > span{
+  background-color: #34495e;
+  border-color: #34495e;
+}
+.facetview_metadata  .facetview_decrement {
+  padding: 5px 5px 8.5px;
+  margin: 0px;
+}
+
+#nav-collapse-01 .nav > li:first-child > a {
+  -webkit-border-radius: 0 0 0 0px !important;
+  -moz-border-radius: 0 0 0 0px !important;
+  border-radius: 0 0 0 0px !important;
+}
+
+.facetview_metadata .pagination ul li.active > a:hover, 
+.facetview_metadata .pagination ul li.active > span:hover, 
+.facetview_metadata .pagination ul li.active > a:focus, 
+.facetview_metadata .pagination ul li.active > span:focus {
+background-color: #1abc9c !important;
+border-color: #1abc9c !important;
+color: #d6dbdf;
+-webkit-box-shadow: none;
+-moz-box-shadow: none;
+box-shadow: none;
+}
+
+
 .media-object { width: 64px; height: 64px; padding-bottom: 30px }
