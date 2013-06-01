@@ -156,8 +156,8 @@ box-shadow: none;
   display: block;
 }
 
-.btn {
-  color: #34495e
+.facetview_filters .btn {
+  color: #34495e;
 }
 
 
