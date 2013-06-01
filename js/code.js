@@ -177,16 +177,23 @@ var Mapper = function (dom_id) {
         locations.map(function (point) {
             // add a marker in the given location, attach some popup content to it and open the popup
             var latlong = new google.maps.LatLng(point[0],point[1]);
-            for (var i = 0; i < point[2]; i++) {
-              var marker = new google.maps.Marker({position: latlong});
-              markersArray.push(marker);
-            }
+            var numberMarker = new google.maps.Marker(
+                {
+                    position:latlong,
+                    map:map,
+                    //icon:'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld='+point[2]+'|FF776B|000000',
+                    //icon:'https://chart.googleapis.com/chart?chst=d_map_spin&chld=1.4|0|FFFF42|12|b|' + point[2],
+                    icon:'https://chart.googleapis.com/chart?chst=d_bubble_text_small&chld=bb|'+point[2]+'|FFBB00|000000',
+                    shadow:'https://chart.googleapis.com/chart?chst=d_map_pin_shadow'
+                }
+            );
+            markersArray.push(numberMarker);
         });
-        var mcOptions = {gridSize: 30, maxZoom: 19};
+        //var mcOptions = {gridSize: 30, maxZoom: 19};
         if (mc != undefined) {
-          mc.clearMarkers();
+          //mc.clearMarkers();
         }
-        mc = new MarkerClusterer(map, markersArray, mcOptions);
+        //mc = new MarkerClusterer(map, markersArray, mcOptions);
     };
 
     return {
