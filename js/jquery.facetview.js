@@ -850,9 +850,9 @@ search box - the end user will not know they are happening.
                             }
                         }
                     }
+                    
+                    display[lineitem][object]['pre'] ? line += display[lineitem][object]['pre'] : false;
                     if (thevalue && thevalue.toString().length) {
-                        display[lineitem][object]['pre']
-                            ? line += display[lineitem][object]['pre'] : false;
                         if ( typeof(thevalue) == 'object' ) {
                             if(thevalue.constructor.toString().indexOf("Date") > 0) {
                                 //if it is a date
@@ -872,9 +872,8 @@ search box - the end user will not know they are happening.
                         else {
                             line += thevalue;
                         }
-                        display[lineitem][object]['post'] 
-                            ? line += display[lineitem][object]['post'] : line += ' ';
                     }
+                    display[lineitem][object]['post'] ? line += display[lineitem][object]['post'] : line += ' ';
                 }
                 if (line) {
                     lines += line.replace(/^\s/,'').replace(/\s$/,'').replace(/\,$/,'') + "<br />";
