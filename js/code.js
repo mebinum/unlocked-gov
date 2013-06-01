@@ -99,11 +99,9 @@ jQuery(document).ready(function($) {
       var location_totals = [];
       for (var i = 0; i < sdata.facets.location_total.terms.length; i++) {
         var entry = sdata.facets.location_total.terms[i];
-        location_totals.push({term: geohash.decode(entry.term), count: entry.total});
+        location_totals.push({location: geohash.decode(entry.term), count: entry.total});
       }
-
-      console.log(sdata);
-      Mapper('map').data(sdata.hits.hits).drawMap();
+      Mapper('map').data(location_totals).drawMap();
     }
   });
   // set up form
@@ -137,13 +135,14 @@ var Mapper = function (dom_id) {
         if(theData.length === 0) return;
         var locations = [];
         theData.map(function (source) {
-            var theSource = source["_source"];
-            Object.keys(theSource).map(function(key) {
-                if(!theSource.hasOwnProperty(key)) return;
-                var val = theSource[key];
-                if(key.match(/location/) && isLongLat(val) ){
-                    var point = isLongLat(val);
-                    locations.push([parseFloat(point[0]),parseFloat(point[1])]);
+            //var theSource = source["_source"];
+            Object.keys(source).map(function(key) {
+                if(!source.hasOwnProperty(key)) return;
+                var val = source[key];
+                if(key.match(/location/)){
+                    //var point = isLongLat(val);
+                    locations.push([val.latitude, val.longitude, source.count]);
+                    //locations.push([parseFloat(point[0]),parseFloat(point[1])]);
                 }
             });
         });
@@ -162,8 +161,10 @@ var Mapper = function (dom_id) {
         locations.map(function (point) {
             // add a marker in the given location, attach some popup content to it and open the popup
             var latlong = new google.maps.LatLng(point[0],point[1]);
-            var marker = new google.maps.Marker({position: latlong});
-            markers.push(marker);
+            for (var i = 0; i < point[2]; i++) {
+              var marker = new google.maps.Marker({position: latlong});
+              markers.push(marker);
+            }
         });
         var mcOptions = {gridSize: 30, maxZoom: 19};
         var mc = new MarkerClusterer(map, markers, mcOptions);
