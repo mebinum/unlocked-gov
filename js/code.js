@@ -230,7 +230,7 @@ var Donut = function(dom_id) {
     var draw = function() {
 
         var entries = this.data.sort( function(a, b) {  // Sort the data by term names, so the
-            return a.term <; b.term ? -1 : 1;            // color scheme for wedges is preserved
+            return a.term < b.term ? -1 : 1;            // color scheme for wedges is preserved
         }),                                             // with any order
 
         values  = pv.map(entries, function(e) {         // Create an array holding just the counts
