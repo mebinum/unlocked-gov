@@ -11,6 +11,7 @@ jQuery(document).ready(function($) {
     saveResultsJsonButton: '#download-dataset-button-json',
     saveResultsCsvButton: '#download-dataset-button-csv',
     facets: [
+        {'field':'event_date', 'display': 'Date'},
         {'field':'event_year', 'display': 'Year'},
         {'field':'state', 'display': 'State'},
         {'field':'area', 'display': 'Area'}, 
@@ -62,6 +63,10 @@ jQuery(document).ready(function($) {
     paging: {
       from: 0,
       size: 10
+    },
+    onResultsReturned: function(sdata) {
+      Donut('graph-area').data(sdata.facets.area.terms).draw();
+      Timeline('graph-timeline').data(sdata.facets.event_date.terms).draw();
     }
   });
   // set up form
