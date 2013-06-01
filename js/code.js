@@ -177,7 +177,7 @@ var Mapper = function (dom_id) {
             // add a marker in the given location, attach some popup content to it and open the popup
             var latlong = new google.maps.LatLng(point[0],point[1]);
             bounds.extend(latlong);
-            
+
             var numberMarker = new google.maps.Marker(
                 {
                     position:latlong,
@@ -313,7 +313,12 @@ var Timeline = function(dom_id) {
            })
 
            .event("mousedown", function(d) {            // On "mouse down", perform action,
-               var time = entries[this.index].time;     // eg filtering the results...
+               var date = new Date(d.term); 
+               var time = [
+                     date.getDate(),
+                     date.getMonth() + 1,
+                     date.getFullYear()
+                 ].join('/')  // eg filtering the results...
                return (alert("Timestamp: '"+time+"'"));
            })
 
