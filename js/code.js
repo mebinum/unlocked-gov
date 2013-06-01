@@ -161,10 +161,9 @@ var Mapper = function (dom_id) {
         // create a map in the "map" div, set the view to a given place and zoom
         var aloc = locations[0];
         var mapOptions = {
-          center: new google.maps.LatLng(aloc[0], aloc[1]),
-          zoom: 10,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
+        var bounds = new google.maps.LatLngBounds();
         if (map == undefined) {
           var mapEl = document.getElementById(dom_id);
           map = new google.maps.Map(mapEl, mapOptions);
@@ -177,6 +176,8 @@ var Mapper = function (dom_id) {
         locations.map(function (point) {
             // add a marker in the given location, attach some popup content to it and open the popup
             var latlong = new google.maps.LatLng(point[0],point[1]);
+            bounds.extend(latlong);
+            
             var numberMarker = new google.maps.Marker(
                 {
                     position:latlong,
@@ -189,6 +190,7 @@ var Mapper = function (dom_id) {
             );
             markersArray.push(numberMarker);
         });
+        map.fitBounds(bounds);
         //var mcOptions = {gridSize: 30, maxZoom: 19};
         if (mc != undefined) {
           //mc.clearMarkers();
