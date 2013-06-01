@@ -4,7 +4,7 @@
     <!-- Meta Tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Title -->
-    <title>Crime Hack - Discover Crime Stats Near you</title>
+    <title>Unlocked.Gov- Discover Data Stats</title>
     <!-- Stylesheets -->
     <link rel="stylesheet" href="css/style.css" media="screen">
     <link rel="stylesheet" href="css/normalize.css" media="screen">
@@ -12,6 +12,12 @@
     <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" href="bootstrap/css/bootstrap-responsive.css" media="screen">
     <link rel="stylesheet" href="css/flat-ui.css" media="screen">
+    <!-- leaflet css -->
+     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.css" />
+<!--[if lte IE 8]>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.ie.css" />
+<![endif]-->
+
 </head>
 <body>
     <div class="navbar-wrapper">
@@ -19,31 +25,53 @@
       <div class="container">
 
         <div class="navbar navbar-inverse">
-          <div class="navbar-inner">
-            <!-- Responsive Navbar Part 1: Button for triggering responsive navbar (not covered in tutorial). Include responsive CSS to utilize. -->
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="brand" href="#">Crime Hack</a>
-            <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
-            <div class="nav-collapse collapse">
-              <ul class="nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-              </ul>
-            </div><!--/.nav-collapse -->
-          </div><!-- /.navbar-inner -->
-        </div><!-- /.navbar -->
+            <div class="navbar-inner">
+              <div class="container">
+                 <a id="logo" class="brand logo" href="/">Unlocked.Gov</a>
+                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target="#nav-collapse-01"></button>
+                <div class="nav-collapse collapse" id="nav-collapse-01">
+                  <ul class="nav">
+                    <li>
+                      <a href="#fakelink">
+                        Menu Item
+                        <span class="navbar-unread">1</span>
+                      </a>
+                    </li>
+                    <li class="active">
+                      <a href="#fakelink">
+                        Messages
+                        <span class="navbar-unread">1</span>
+                      </a>
+                      <ul>
+                        <li><a href="#fakelink">Element One</a></li>
+                        <li>
+                          <a href="#fakelink">Sub menu</a>
+                          <ul>
+                            <li><a href="#fakelink">Element One</a></li>
+                            <li><a href="#fakelink">Element Two</a></li>
+                            <li><a href="#fakelink">Element Three</a></li>
+                          </ul> <!-- /Sub menu -->
+                        </li>
+                        <li><a href="#fakelink">Element Three</a></li>
+                      </ul> <!-- /Sub menu -->
+                    </li>
+                    <li>
+                      <a href="#fakelink">
+                        About Us
+                      </a>
+                    </li>
+                  </ul>
+                </div><!--/.nav -->
+              </div>
+            </div>
+          </div><!--/.navbar -->
 
       </div> <!-- /.container -->
     </div>
 
     <!-- Section #1 -->
     <section id="intro" data-speed="6" data-type="background">
-        <div class="container">
+        <div id="map" class="container">
             <div class="hero-unit">
                 <h2>This will be the place holder for the maps</h2>
 
@@ -75,7 +103,7 @@
     </section>
 
     <!-- Section #3 -->
-    <section id="about" data-speed="2" data-type="background">
+    <section id="about" data-speed="2" data-type="background" class="palette-asbestos">
         <div class="container">
             <div class="page-header">
                 <h1>Final Section Headline <small>Some subtext goes here...</small></h1>
@@ -145,7 +173,7 @@
             </div>
         </div>
     </section>
-
+     <script src="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.js"></script>
     <script src="js/jquery-1.8.3.min.js"></script>
     <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
     <script src="js/jquery.ui.touch-punch.min.js"></script>
