@@ -431,7 +431,8 @@ search box - the end user will not know they are happening.
             "pushstate": true,
             "linkify": true,
             "default_operator": "OR",
-            "default_freetext_fuzzify": false
+            "default_freetext_fuzzify": false,
+            "on_results_returned": false
         };
 
 
@@ -983,6 +984,10 @@ search box - the end user will not know they are happening.
             // if a post search callback is provided, run it
             if (typeof options.post_search_callback == 'function') {
                 options.post_search_callback.call(this);
+            }
+
+            if (typeof options.on_results_returned == 'function') {
+                options.on_results_returned(sdata);
             }
         };
 
