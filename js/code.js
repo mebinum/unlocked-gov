@@ -134,7 +134,7 @@ var Timeline = function(dom_id) {
             .width(w)
             .height(h)
             .bottom(20)
-            .left(20)
+            .left(40)
             .right(40)
             .top(40);
 
@@ -178,7 +178,7 @@ var Timeline = function(dom_id) {
             .textMargin("5")
 
          vis.add(pv.Rule)                               // Add the Y-ticks
-            .data(y.ticks(max))                         // Compute tick levels based on the "max" value
+            .data(y.ticks(5))                         // Compute tick levels based on the "max" value
             .bottom(y)
             .strokeStyle("#eee")
             .anchor("left").add(pv.Label)
