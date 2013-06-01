@@ -1196,7 +1196,7 @@ search box - the end user will not know they are happening.
                     }
                     console.log({data: output});
 
-                    var blob = new Blob([JSON.stringify({data: output})], {type: 'application/javascript'});
+                    var blob = new Blob([JSON.stringify({data: output}, null, 4)], {type: 'application/javascript'});
                     window.open(window.URL.createObjectURL(blob),'_blank');
                 }
             });
