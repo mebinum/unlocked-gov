@@ -16,7 +16,7 @@ jQuery(document).ready(function($) {
         {'field':'area', 'display': 'Area'}, 
         {'field':'lga_name', 'display': 'LGA'},
         {'field':'offense_category', 'display': 'Offense Category'}, 
-        {'field':'sub_category', 'display': 'Sub Category'}
+        {'field':'subcategory', 'display': 'Sub Category'}
     ],
     searchwrap_start: '<table class="table table-striped table-bordered" id="facetview_results"><thead><tr><td></td><td>Date</td><td>State</td><td>Area</td><td>LGA</td><td>Offense Category</td><td>Sub Category</td><td>Count</td></tr></thead><tbody>',
     searchwrap_end: '</tbody></table>',
@@ -49,7 +49,7 @@ jQuery(document).ready(function($) {
                     },
                     {
                         "pre": "<td>",
-                        "field": "sub_category",
+                        "field": "subcategory",
                         "post": "</td>"
                     },
                     {
