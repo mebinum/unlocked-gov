@@ -605,7 +605,7 @@ search box - the end user will not know they are happening.
                 var filters = options.facets;
                 var thefilters = '';
                 for ( var idx = 0; idx < filters.length; idx++ ) {
-                    var _filterTmpl = '<table id="facetview_{{FILTER_NAME}}" class="facetview_filters table table-bordered " style="display:none;"> \
+                    var _filterTmpl = '<table id="facetview_{{FILTER_NAME}}" class="facetview_filters table table-bordered table-condensed table-striped" style="display:none;"> \
                         <tr><td><a class="facetview_filtershow" title="filter by {{FILTER_DISPLAY}}" rel="{{FILTER_NAME}}" \
                         style="color:#333; font-weight:bold;" href=""><i class="icon-plus"></i> {{FILTER_DISPLAY}} \
                         </a> \
@@ -911,12 +911,13 @@ search box - the end user will not know they are happening.
             }
 
             // put the filtered results on the page
-            $('#facetview_results',obj).html("");
+            var results_selector = '#facetview_results tbody';
+            $(results_selector ,obj).html("");
             var infofiltervals = new Array();
             $.each(data.records, function(index, value) {
                 // write them out to the results div
-                 $('#facetview_results', obj).append( buildrecord(index) );
-                 options.linkify ? $('#facetview_results tr:last-child', obj).linkify() : false;
+                 $(results_selector, obj).append( buildrecord(index) );
+                 options.linkify ? $(results_selector + ' tr:last-child', obj).linkify() : false;
             });
             if ( options.result_box_colours.length > 0 ) {
                 jQuery('.result_box', obj).each(function () {
@@ -924,7 +925,7 @@ search box - the end user will not know they are happening.
                     jQuery(this).css("background-color", colour);
                 });
             }
-            $('#facetview_results', obj).children().hide().fadeIn(options.fadein);
+            $(results_selector, obj).children().hide().fadeIn(options.fadein);
             $('.facetview_viewrecord', obj).bind('click',viewrecord);
             jQuery('.notify_loading').hide();
             // if a post search callback is provided, run it
@@ -1100,6 +1101,88 @@ search box - the end user will not know they are happening.
                 // processData: false,
                 dataType: options.datatype,
                 success: showresults
+            });
+        };
+
+        // Save full result set as JSON
+        var saveResultsJson = function() {
+            // update the options with the latest q value
+            if ( options.searchbox_class.length == 0 ) {
+                options.q = $('.facetview_freetext', obj).val();
+            } else {
+                options.q = $(options.searchbox_class).last().val();
+            };
+            // make the search query
+            var qrystr = elasticsearchquery();
+            // augment the URL bar if possible
+            $.ajax({
+                type: "get",
+                url: options.search_url,
+                data: {source: qrystr},
+                // processData: false,
+                dataType: options.datatype,
+                success: function(sdata) {
+                    var output = [];
+                    for (var i = 0; i < sdata.hits.hits.length; i++) {
+                        var hit = sdata.hits.hits[i];
+                        output.push(hit["_source"]);
+                    }
+                    console.log({data: output});
+
+                    var blob = new Blob([JSON.stringify({data: output})], {type: 'application/javascript'});
+                    window.open(window.URL.createObjectURL(blob),'_blank');
+                }
+            });
+        };
+
+        // Save full result set as JSON
+        var saveResultsCsv = function() {
+            // update the options with the latest q value
+            if ( options.searchbox_class.length == 0 ) {
+                options.q = $('.facetview_freetext', obj).val();
+            } else {
+                options.q = $(options.searchbox_class).last().val();
+            };
+            // make the search query
+            var qrystr = elasticsearchquery();
+            // augment the URL bar if possible
+            $.ajax({
+                type: "get",
+                url: options.search_url,
+                data: {source: qrystr},
+                // processData: false,
+                dataType: options.datatype,
+                success: function(sdata) {
+                    var output = "";
+                    for (var i = 0; i < sdata.hits.hits.length; i++) {
+                        var line = "";
+                        var hit = sdata.hits.hits[i];
+                        var keys = Object.keys(hit["_source"]);
+
+                        if (i == 0) {
+                            var header = "";
+                            for (var k = 0; k < keys.length; k++) {
+                                if (header.length > 0) {
+                                    header += ",";
+                                }
+                                header += keys[k];
+                            }
+                            output += header + '\n';
+                        }
+
+                        for (var j = 0; j < keys.length; j++) {
+                            if (line.length > 0) {
+                                line += ",";
+                            }
+                            line += "\"" + hit["_source"][keys[j]] + "\"";
+                        }
+                        output += line + '\n';
+                    }
+                    console.log(output);
+
+                    var blob = new Blob([output], {type: 'text/plain'});
+                    window.open(window.URL.createObjectURL(blob),'_blank');
+                }
             });
         };
 
@@ -1312,6 +1395,14 @@ search box - the end user will not know they are happening.
                 $('.facetview_orderby', obj).bind('change',orderby);
                 $('.facetview_order', obj).bind('click',order);
                 $('.facetview_sharesave', obj).bind('click',sharesave);
+
+                $(options.saveResultsJsonButton).click(function() {
+                    saveResultsJson();
+                });
+
+                $(options.saveResultsCsvButton).click(function() {
+                    saveResultsCsv();
+                });
 
                 // check paging info is available
                 !options.paging.size && options.paging.size != 0 ? options.paging.size = 10 : "";
