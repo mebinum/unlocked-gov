@@ -87,7 +87,7 @@ jQuery(document).ready(function($) {
       var histogram_data = [];
       for (var i = 0; i < sdata.facets.histo1.entries.length; i++) {
         var entry = sdata.facets.histo1.entries[i];
-        histogram_data.push({term: entry.time, count: entry.total});
+        histogram_data.push({term: entry.time, count: entry.total / 100});
       }
       Timeline('graph-timeline').data(histogram_data).draw();
       console.log(sdata);
