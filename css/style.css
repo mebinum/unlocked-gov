@@ -165,3 +165,8 @@ box-shadow: none;
 
 
 .media-object { width: 64px; height: 64px; padding-bottom: 30px }
+
+#facetview_event_date  {
+  position: absolute;
+  top: 0px;
+}
