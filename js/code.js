@@ -116,6 +116,16 @@ jQuery(document).ready(function($) {
   });
 });
 
+
+var map = undefined;
+var markersArray = [];
+var mc = undefined;
+google.maps.Map.prototype.clearOverlays = function() {
+  for (var i = 0; i < markersArray.length; i++ ) {
+    markersArray[i].setMap(null);
+  }
+}
+
 var Mapper = function (dom_id) {
     if ('undefined' == typeof dom_id) {                 // Set the default DOM element ID to bind
         dom_id = 'map';
@@ -155,20 +165,28 @@ var Mapper = function (dom_id) {
           zoom: 10,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
-        var mapEl = document.getElementById(dom_id);
-        var map = new google.maps.Map(mapEl, mapOptions);
-        var markers = [];
+        if (map == undefined) {
+          var mapEl = document.getElementById(dom_id);
+          map = new google.maps.Map(mapEl, mapOptions);
+          mapEl.setAttribute("style","min-height:330px;max-height:330px")
+        } else {
+          map.clearOverlays();
+          markersArray = [];
+        }
+
         locations.map(function (point) {
             // add a marker in the given location, attach some popup content to it and open the popup
             var latlong = new google.maps.LatLng(point[0],point[1]);
             for (var i = 0; i < point[2]; i++) {
               var marker = new google.maps.Marker({position: latlong});
-              markers.push(marker);
+              markersArray.push(marker);
             }
         });
         var mcOptions = {gridSize: 30, maxZoom: 19};
-        var mc = new MarkerClusterer(map, markers, mcOptions);
-        mapEl.setAttribute("style","min-height:330px;max-height:330px");
+        if (mc != undefined) {
+          mc.clearMarkers();
+        }
+        mc = new MarkerClusterer(map, markersArray, mcOptions);
     };
 
     return {
