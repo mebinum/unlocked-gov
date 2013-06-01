@@ -1119,6 +1119,13 @@ search box - the end user will not know they are happening.
             };
             // make the search query
             var qrystr = elasticsearchquery();
+
+            var q = JSON.parse(qrystr);
+            q['from'] = 0;
+            q['size'] = 1000;
+            qrystr = JSON.stringify(q);
+
+
             // augment the URL bar if possible
             $.ajax({
                 type: "get",
@@ -1150,6 +1157,12 @@ search box - the end user will not know they are happening.
             };
             // make the search query
             var qrystr = elasticsearchquery();
+
+            var q = JSON.parse(qrystr);
+            q['from'] = 0;
+            q['size'] = 1000;
+            qrystr = JSON.stringify(q);
+
             // augment the URL bar if possible
             $.ajax({
                 type: "get",
