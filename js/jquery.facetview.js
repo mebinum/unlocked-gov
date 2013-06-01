@@ -731,6 +731,9 @@ search box - the end user will not know they are happening.
                 date.setUTCHours(int(match[4] || 0) - tzHour, int(match[5] || 0) - tzMin, int(match[6] || 0), int(match[7] || 0));
                 return date;
             }
+            if(string.length == 18){
+                 string = [string.slice(0, 5), "0", string.slice(5)].join('');
+            }
             var date = new Date(string);
             if(isNaN(date)) 
                 return string;

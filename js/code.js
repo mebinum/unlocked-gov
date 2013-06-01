@@ -67,6 +67,7 @@ jQuery(document).ready(function($) {
     on_results_returned: function(sdata) {
       Donut('graph-area').data(sdata.facets.area.terms).draw();
       Timeline('graph-timeline').data(sdata.facets.event_date.terms).draw();
+      console.log(sdata);
     }
   });
   // set up form
