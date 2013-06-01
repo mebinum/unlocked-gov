@@ -22,7 +22,7 @@ curl -XPUT "http://$ES_SERVER/nswcrime/nswcrime/_mapping" -d '{
             "state": {"type": "string", "store": "yes"},
             "area": {"type": "string", "store": "yes", "index" : "not_analyzed"},
             "lga_name": {"type": "string", "store": "yes", "index" : "not_analyzed"},
-            "lga_location": {"type": "geo_point", "store": "yes"},
+            "lga_location": {"type": "geo_point", "store": "yes", "lat_lon": "true"},
             "offense_category": {"type": "string", "store": "yes", "index" : "not_analyzed"},
             "subcategory": {"type": "string", "store": "yes", "index" : "not_analyzed"},
             "event_date": {"type": "date", "store": "yes"},
