@@ -141,9 +141,9 @@ var Timeline = function(dom_id) {
          vis.add(pv.Label)                              // Add the chart legend at top left
             .top(-20)
             .text(function() {
-                 var first = new Date(entries[0].time);
-                 var last  = new Date(entries[entries.length-2].time);
-                 return "Articles published between " +
+                 var first = new Date(entries[0].term);
+                 var last  = new Date(entries[entries.length-2].term);
+                 return "Crimes committed between " +
                      [ first.getDate(),
                        first.getMonth() + 1,
                        first.getFullYear()
@@ -160,7 +160,7 @@ var Timeline = function(dom_id) {
 
          vis.add(pv.Rule)                               // Add the X-ticks
             .data(entries)
-            .visible(function(d) {return d.time;})
+            .visible(function(d) {return d.term;})
             .left(function() { return x(this.index); })
             .bottom(-15)
             .height(15)
@@ -168,7 +168,7 @@ var Timeline = function(dom_id) {
 
             .anchor("right").add(pv.Label)              // Add the tick label (DD/MM)
             .text(function(d) {
-                 var date = new Date(d.time);
+                 var date = new Date(d.term); 
                  return [
                      date.getDate(),
                      date.getMonth() + 1
