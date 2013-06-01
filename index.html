@@ -12,12 +12,6 @@
     <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" href="bootstrap/css/bootstrap-responsive.css" media="screen">
     <link rel="stylesheet" href="css/flat-ui.css" media="screen">
-    <!-- leaflet css -->
-     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.css" />
-<!--[if lte IE 8]>
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.ie.css" />
-<![endif]-->
-
 </head>
 <body>
     <div class="navbar-wrapper">
@@ -56,10 +50,12 @@
         <div class="main-row row-fluid">
         <div class="span11 ">
         <!--Body content-->
-          
+          <div class="row-fluid">
+              <div id="map" class="span12" style="height:330px"></div>
+          </div>
          <section id="ul-main">
+            
              <div class="facet-view-simple"></div>
-
              <div class="graphs row-fluid">
               <div class="span3"></div>
               <div class="span3">
@@ -162,6 +158,9 @@
     <script src="js/jquery.tagsinput.js"></script>
     <script src="js/jquery.placeholder.js"></script>
     <script src="js/jquery.stacktable.js"></script>
+    <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpbfvH-2NxgjE3pR7TCIUhHdx2GjZt9Qs&amp;sensor=false">
+    </script>
     <script type="text/javascript" src="linkify/1.0/jquery.linkify-1.0-min.js"></script>
     <script type="text/javascript" src="js/jquery.facetview.js"></script>
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>

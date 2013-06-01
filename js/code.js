@@ -67,7 +67,7 @@ jQuery(document).ready(function($) {
     on_results_returned: function(sdata) {
       Donut('graph-area').data(sdata.facets.area.terms).draw();
       Timeline('graph-timeline').data(sdata.facets.event_date.terms).draw();
-      console.log(sdata);
+      Mapper('map').data(sdata.hits.hits).drawMap();
     }
   });
   // set up form
@@ -81,6 +81,74 @@ jQuery(document).ready(function($) {
     $('.facet-view-here').facetview(_data);
   });
 });
+
+var Mapper = function (dom_id) {
+    if ('undefined' == typeof dom_id) {                 // Set the default DOM element ID to bind
+        dom_id = 'map';
+    }
+
+    var data = function(json) {                         // Set the data for the chart
+        this.data = json;
+        return this;
+    };
+
+    var isLongLat = function function_name (string) {
+         return string.match(/-?\d+\.\d+/g);
+    };
+
+    var drawMap = function () {
+        var theData = this.data;
+        if(theData.length === 0) return;
+        var locations = [];
+        theData.map(function (source) {
+            var theSource = source["_source"];
+            Object.keys(theSource).map(function(key) {
+                if(!theSource.hasOwnProperty(key)) return;
+                var val = theSource[key];
+                if(key.match(/location/) && isLongLat(val) ){
+                    var point = isLongLat(val);
+                    locations.push([parseFloat(point[0]),parseFloat(point[1])]);
+                }
+            });
+        });
+
+        if(locations.length === 0) return;
+        // create a map in the "map" div, set the view to a given place and zoom
+        var aloc = locations[0];
+        var mapOptions = {
+          center: new google.maps.LatLng(aloc[0], aloc[1]),
+          zoom: 8,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById(dom_id), mapOptions);
+        //var map = L.mapbox.map('map', 'mebinum.map-023ictet').setView(aloc, 5);
+        // new L.map(dom_id).setView(aloc, 5);
+        // var jsonp = 'http://a.tiles.mapbox.com/v3/mebinum.map-wu6wsgk4.jsonp';
+
+        // wax.tilejson(jsonp, function(tilejson) {
+        //     map.addLayer(new wax.leaf.connector(tilejson));
+        // });
+        // // add an OpenStreetMap tile layer
+        // L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        //         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        // }).addTo(map);
+        locations.map(function (point) {
+            // add a marker in the given location, attach some popup content to it and open the popup
+            console.log("point");
+            console.log(point);
+            var latlong = new google.maps.LatLng(point[0],point[1]);
+            var marker = new google.maps.Marker({
+                position: latlong,
+                map: map
+             });
+        });
+    };
+
+    return {
+        data: data,
+        drawMap: drawMap
+    };
+};
 
 /* Protovis stuff */
 var Timeline = function(dom_id) {
