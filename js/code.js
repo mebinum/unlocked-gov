@@ -32,6 +32,12 @@ jQuery(document).ready(function($) {
                 "value_field" : "t_count",
                 "interval" : "month"
             }
+        }, 
+        "location_total" : {
+            "terms_stats" : {
+                "key_field" : "lga_location",
+                "value_field" : "t_count"
+            }
         }
       }
     ,
@@ -89,6 +95,13 @@ jQuery(document).ready(function($) {
         histogram_data.push({term: entry.time, count: entry.total});
       }
       Timeline('graph-timeline').data(histogram_data).draw();
+
+      var location_totals = [];
+      for (var i = 0; i < sdata.facets.location_total.terms.length; i++) {
+        var entry = sdata.facets.location_total.terms[i];
+        location_totals.push({term: geohash.decode(entry.term), count: entry.total});
+      }
+
       console.log(sdata);
       Mapper('map').data(sdata.hits.hits).drawMap();
     }
