@@ -709,6 +709,45 @@ search box - the end user will not know they are happening.
             }
             dosearch();
         };
+
+        var R_ISO8601_STR = /^(\d{4})-?(\d\d)-?(\d\d)(?:T(\d\d)(?::?(\d\d)(?::?(\d\d)(?:\.(\d+))?)?)?(Z|([+-])(\d\d):?(\d\d))?)?$/;
+
+        var inDateFormat = function function_name (string) {
+            string.match(R_ISO8601_STR);
+        };
+
+        var jsonStringToDate = function(string) {
+            var match;
+            if (match = inDateFormat(string)) {
+                var date = new Date(0),
+                    tzHour = 0,
+                    tzMin = 0;
+                if (match[9]) {
+                    tzHour = int(match[9] + match[10]);
+                    tzMin = int(match[9] + match[11]);
+                }
+                date.setUTCFullYear(int(match[1]), int(match[2]) - 1, int(match[3]));
+                date.setUTCHours(int(match[4] || 0) - tzHour, int(match[5] || 0) - tzMin, int(match[6] || 0), int(match[7] || 0));
+                return date;
+            }
+            var date = new Date(string);
+            if(isNaN(date)) 
+                return string;
+            return date;
+        };
+
+        //takes an object and parses all fields with a key that contains date
+        //or if the value is in date time format
+        var parseDates = function (obj) {
+            for (var key in obj) {
+                if(!obj.hasOwnProperty(key)) return;
+
+                if(key.match(/date/)) {
+                    obj[key] = jsonStringToDate(obj[key]);
+                }
+            };
+            return obj;
+        };
         
         // ===============================================
         // functions to do with building results
@@ -732,7 +771,9 @@ search box - the end user will not know they are happening.
                     }
                     resultobj["records"].push(dataobj.hits.hits[item].fields[keys[0]]);
                 } else {
-                    resultobj["records"].push(dataobj.hits.hits[item]._source);
+                    var record = dataobj.hits.hits[item]._source;
+                    record = parseDates(record);
+                    resultobj["records"].push(record);
                 }
             }
             resultobj["start"] = "";
@@ -809,11 +850,22 @@ search box - the end user will not know they are happening.
                         display[lineitem][object]['pre']
                             ? line += display[lineitem][object]['pre'] : false;
                         if ( typeof(thevalue) == 'object' ) {
-                            for ( var val = 0; val < thevalue.length; val++ ) {
-                                val != 0 ? line += ', ' : false;
-                                line += thevalue[val];
+                            if(thevalue.constructor.toString().indexOf("Date") > 0) {
+                                //if it is a date
+                                var d = new Date(thevalue);
+                                var curr_date = d.getDate();
+                                var curr_month = d.getMonth() + 1; //Months are zero based
+                                var curr_year = d.getFullYear();
+                                line += curr_date + "-" + curr_month + "-"+ curr_year;
+                            } else {
+                                for ( var val = 0; val < thevalue.length; val++ ) {
+                                    val != 0 ? line += ', ' : false;
+                                    line += thevalue[val];
+                                }
                             }
-                        } else {
+                            
+                        }
+                        else {
                             line += thevalue;
                         }
                         display[lineitem][object]['post'] 

@@ -72,8 +72,6 @@ jQuery(document).ready(function($) {
     $.each($form.serializeArray(), function(idx, item) {
       _data[item.name] = item.value;
     });
-    console.log("this is the data");
-    console.log(_data);
     $('.facet-view-here').facetview(_data);
   });
 });
