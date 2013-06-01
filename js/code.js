@@ -64,7 +64,7 @@ jQuery(document).ready(function($) {
       from: 0,
       size: 10
     },
-    onResultsReturned: function(sdata) {
+    on_results_returned: function(sdata) {
       Donut('graph-area').data(sdata.facets.area.terms).draw();
       Timeline('graph-timeline').data(sdata.facets.event_date.terms).draw();
     }

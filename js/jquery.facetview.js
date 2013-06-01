@@ -432,7 +432,7 @@ search box - the end user will not know they are happening.
             "linkify": true,
             "default_operator": "OR",
             "default_freetext_fuzzify": false,
-            "onResultsReturned": function(data) {}
+            "on_results_returned": false
         };
 
 
@@ -934,8 +934,8 @@ search box - the end user will not know they are happening.
                 options.post_search_callback.call(this);
             }
 
-            if (typeof options.onResultsReturned == 'function') {
-                options.onResultsReturned(sdata);
+            if (typeof options.on_results_returned == 'function') {
+                options.on_results_returned(sdata);
             }
         };
 
