@@ -15,7 +15,7 @@ jQuery(document).ready(function($) {
         {'field':'event_year', 'display': 'Year'},
         {'field':'state', 'display': 'State'},
         {'field':'area', 'display': 'Area'}, 
-        {'field':'lga_name', 'display': 'LGA'},
+        {'field':'lga_name', 'display': 'Local Gov Area (LGA)'},
         {'field':'offense_category', 'display': 'Offense Category'}, 
         {'field':'subcategory', 'display': 'Sub Category'}
     ],
