@@ -907,10 +907,12 @@ search box - the end user will not know they are happening.
                 $('#facetview_' + facetclean, obj).children().find('.facetview_filtervalue').remove();
                 var records = data["facets"][ facet ];
                 for ( var item in records ) {
-                    var append = '<tr class="facetview_filtervalue" style="display:none;"><td><a class="facetview_filterchoice' +
-                        '" rel="' + facet + '" href="' + item + '">' + item +
-                        ' (' + records[item] + ')</a></td></tr>';
-                    $('#facetview_' + facetclean, obj).append(append);
+                    if (item !== "") {
+                        var append = '<tr class="facetview_filtervalue" style="display:none;"><td><a class="facetview_filterchoice' +
+                            '" rel="' + facet + '" href="' + item + '">' + item +
+                            ' (' + records[item] + ')</a></td></tr>';
+                        $('#facetview_' + facetclean, obj).append(append);
+                    }
                 }
                 if ( $('.facetview_filtershow[rel="' + facetclean + '"]', obj).hasClass('facetview_open') ) {
                     $('#facetview_' + facetclean, obj ).children().find('.facetview_filtervalue').show();
