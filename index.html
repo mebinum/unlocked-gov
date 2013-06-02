@@ -53,7 +53,13 @@
         <h2>NSW Crime Reports 1995 - 2012</h2>
         <!--Body content-->
           <div class="row-fluid" style="display:inline-block;">
-              <div id="map" class="span12"></div>
+            <div class="span5">
+              <div id="map"></div>
+            </div>
+              <div class="span7">
+                <h3>Crime trend</h3>
+                <div id="graph-timeline"></div>
+              </div>
           </div>
          <section id="ul-main">
             
@@ -64,14 +70,7 @@
                 <h3>By Area</h3>
                 <div id="graph-area"></div>
               </div>
-              <div class="span6">
-                <h3>Timeline</h3>
-                <div id="graph-timeline"></div>
-              </div>
              </div>
-
-            <button id="download-dataset-button-json" class="btn btn-primary"><i class="icon-download-alt icon-white"></i>&nbsp;Download results as JSON</button>
-            <button id="download-dataset-button-csv" class="btn btn-success"><i class="icon-download-alt icon-white"></i>&nbsp;Download results as CSV</button>
          </section>
           
         </div>
