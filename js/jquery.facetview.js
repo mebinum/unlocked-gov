@@ -850,7 +850,7 @@ search box - the end user will not know they are happening.
                             }
                         }
                     }
-                    
+
                     display[lineitem][object]['pre'] ? line += display[lineitem][object]['pre'] : false;
                     if (thevalue && thevalue.toString().length) {
                         if ( typeof(thevalue) == 'object' ) {
@@ -1437,6 +1437,8 @@ search box - the end user will not know they are happening.
                 window.location.pathname + '?source=' + options.querystring + '</textarea> \
                 </div>';
         }
+        thefacetview += '<button id="download-dataset-button-json" class="btn btn-primary" style="margin-left: 5px; float: right; margin-top: 3px;"><i class="icon-download-alt icon-white"></i>&nbsp;JSON</button>';
+        thefacetview += '<button id="download-dataset-button-csv" class="btn btn-success" style="margin-left: 5px; float: right; margin-top: 3px;"><i class="icon-download-alt icon-white"></i>&nbsp;CSV</button>';
         thefacetview += '</div>';
         thefacetview += thehelp;
         thefacetview += '<div style="clear:both;" class="btn-toolbar" id="facetview_selectedfilters"></div>';
