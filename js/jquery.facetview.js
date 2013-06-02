@@ -1400,10 +1400,10 @@ search box - the end user will not know they are happening.
             thefacetview += '<div class="span12" id="facetview_rightcol">';
         }
         thefacetview += '<div class="facetview_search_options_container">';
-        thefacetview += '<div class="btn-group" style="display:inline-block; margin-right:5px;"> \
-            <a class="btn btn-small" title="clear all search settings and start again" href=""><i class="icon-remove"></i></a> \
-            <a class="btn btn-small facetview_learnmore" title="click to view search help information" href="#"><b>?</b></a> \
-            <a class="btn btn-small facetview_howmany" title="change result set size" href="#">{{HOW_MANY}}</a>';
+        thefacetview += '<div class="btn-group" style="display:inline-block; margin-right:5px; margin-top: 3px;"> \
+            <a class="btn" title="clear all search settings and start again" href=""><i class="icon-remove"></i></a> \
+            <a class="btn facetview_learnmore" title="click to view search help information" href="#"><b>?</b></a> \
+            <a class="btn facetview_howmany" title="change result set size" href="#">{{HOW_MANY}}</a>';
         if ( options.search_sortby.length > 0 ) {
             thefacetview += '<a class="btn btn-small facetview_order" title="current order descending. Click to change to ascending" \
                 href="desc"><i class="icon-arrow-down"></i></a>';
@@ -1429,7 +1429,7 @@ search box - the end user will not know they are happening.
             };
             thefacetview += '</select>';
         };
-        thefacetview += '<input type="text" class="facetview_freetext span4" style="display:inline-block; margin:0 0 21px 0; background:' + options.searchbox_shade + ';" name="q" \
+        thefacetview += '<input type="text" class="facetview_freetext span4" style="display:inline-block; margin:0 0 21px 0; height: 30px; background:' + options.searchbox_shade + ';" name="q" \
             value="" placeholder="search term" />';
         if ( options.sharesave_link ) {
             thefacetview += '<a class="btn facetview_sharesave" title="share or save this search" style="margin:0 0 21px 5px;" href=""><i class="icon-share-alt"></i></a>';
