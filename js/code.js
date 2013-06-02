@@ -47,7 +47,7 @@ jQuery(document).ready(function($) {
         }
       }
     ,
-    searchwrap_start: '<table class="table table-striped table-bordered" id="facetview_results"><thead><tr><td></td><td>Date</td><td>State</td><td>Area</td><td>LGA</td><td>Offense Category</td><td>Sub Category</td><td>Count</td></tr></thead><tbody>',
+    searchwrap_start: '<table class="table table-striped table-bordered" id="facetview_results"><thead><tr><td></td><th>Date</th><th>State</th><th>Area</th><th>LGA</th><th>Offense Category</th><th>Sub Category</th><th>Count</th></tr></thead><tbody>',
     searchwrap_end: '</tbody></table>',
     result_display: [
                 [
