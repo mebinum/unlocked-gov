@@ -680,7 +680,7 @@ search box - the end user will not know they are happening.
                 newobj += ' facetview_logic_or';
             }
             newobj += '" rel="' + rel + 
-                '" alt="remove" title="remove"' +
+                '" alt="remove" style="text-decoration: none;" title="remove"' +
                 ' href="' + href + '">' +
                 href + ' <i class="icon-white icon-remove" style="margin-top:1px;"></i></a>';
 
