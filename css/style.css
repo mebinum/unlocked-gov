@@ -191,3 +191,7 @@ box-shadow: none;
   position: absolute;
   top: 0px;
 }
+
+.graphs svg {
+  width: 250px;
+}
