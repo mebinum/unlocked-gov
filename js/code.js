@@ -224,7 +224,7 @@ var Timeline = function(dom_id) {
         // console.log('Drawing, ', entries);
 
         var w = 600,                                    // Set-up dimensions and scales for the chart
-            h = 100,
+            h = 200,
             max = pv.max(entries, function(d) {return d.count;}),
             x = pv.Scale.linear(0, entries.length-1).range(0, w),
             y = pv.Scale.linear(0, max).range(0, h);
