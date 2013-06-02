@@ -1,7 +1,7 @@
   //var serverUrl = 'http://bibsoup.net/query?';
   //var searchIndex = 'elasticsearch';
 
-  var serverUrl = 'http://cs597rmx:iro25kphl0eyg2iw@fig-1962948.us-east-1.bonsai.io/nswcrime/_search?';
+  var serverUrl = 'http://ec2-54-252-174-13.ap-southeast-2.compute.amazonaws.com:9201/nswcrime/_search?';
   var searchIndex = 'nswcrime';
 
 jQuery(document).ready(function($) {
