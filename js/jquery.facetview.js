@@ -814,6 +814,7 @@ search box - the end user will not know they are happening.
         var buildrecord = function(index) {
             var record = options.data['records'][index];
             var result = options.resultwrap_start;
+            var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
             // add first image where available
             if (options.display_images) {
                 var recstr = JSON.stringify(record);
@@ -860,7 +861,7 @@ search box - the end user will not know they are happening.
                                 var curr_date = d.getDate();
                                 var curr_month = d.getMonth() + 1; //Months are zero based
                                 var curr_year = d.getFullYear();
-                                line += curr_date + "-" + curr_month + "-"+ curr_year;
+                                line += monthNames[d.getMonth()] + " "+ curr_year;
                             } else {
                                 for ( var val = 0; val < thevalue.length; val++ ) {
                                     val != 0 ? line += ', ' : false;
