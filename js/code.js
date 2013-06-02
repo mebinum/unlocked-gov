@@ -32,7 +32,13 @@ jQuery(document).ready(function($) {
                 "value_field" : "t_count",
                 "interval" : "month"
             }
-        }, 
+        },
+        "histo2" : {
+            "histogram" : {
+                "field" : "t_count",
+                "interval" : 10
+            }
+        },
         "location_total" : {
             "terms_stats" : {
                 "key_field" : "lga_location",
@@ -88,7 +94,16 @@ jQuery(document).ready(function($) {
     },
     on_results_returned: function(sdata) {
       Donut('graph-area').data(sdata.facets.area.terms).draw();
+      Donut('graph-sub-category').data(sdata.facets.subcategory.terms).draw();
+
+      var count_data = [];
+      for (var i = 0; i < sdata.facets.histo2.entries.length; i++) {
+        var entry = sdata.facets.histo2.entries[i];
+        count_data.push({term: entry.key, count: entry.count});
+      }
+      Donut('graph-count').data(count_data).draw();
       // Transform from enties {} to terms {term: , count: }
+
       var histogram_data = [];
       for (var i = 0; i < sdata.facets.histo1.entries.length; i++) {
         var entry = sdata.facets.histo1.entries[i];
@@ -224,13 +239,13 @@ var Timeline = function(dom_id) {
         // console.log('Drawing, ', entries);
 
         var w = 600,                                    // Set-up dimensions and scales for the chart
-            h = 200,
+            h = 100,
             max = pv.max(entries, function(d) {return d.count;}),
             min = pv.min(entries, function(d) {return d.count;}),
             top = max + (max - min) * 0.1,
             bottom = min - (max - min) * 0.1,
             x = pv.Scale.linear(0, entries.length-1).range(0, w),
-            y = pv.Scale.linear(top, bottom).range(0, h);
+            y = pv.Scale.linear(bottom, top).range(0, h);
 
         var vis = new pv.Panel()                        // Create the basis panel
             .width(w)
@@ -238,29 +253,29 @@ var Timeline = function(dom_id) {
             .bottom(20)
             .left(40)
             .right(40)
-            .top(40);
+            .top(0);
 
-         vis.add(pv.Label)                              // Add the chart legend at top left
-            .top(-20)
-            .text(function() {
-                 var first = new Date(entries[0].term);
-                 var last  = new Date(entries[entries.length-2].term);
-                 return "Crimes committed between " +
-                     [ first.getDate(),
-                       first.getMonth() + 1,
-                       first.getFullYear()
-                     ].join("/") +
+         // vis.add(pv.Label)                              // Add the chart legend at top left
+         //    .top(-20)
+         //    .text(function() {
+         //         var first = new Date(entries[0].term);
+         //         var last  = new Date(entries[entries.length-2].term);
+         //         return "Crimes committed between " +
+         //             [ first.getDate(),
+         //               first.getMonth() + 1,
+         //               first.getFullYear()
+         //             ].join("/") +
 
-                     " and " +
+         //             " and " +
 
-                     [ last.getDate(),
-                       last.getMonth() + 1,
-                       last.getFullYear()
-                     ].join("/");
-             })
-            .textStyle("#B1B1B1");
+         //             [ last.getDate(),
+         //               last.getMonth() + 1,
+         //               last.getFullYear()
+         //             ].join("/");
+         //     })
+         //    .textStyle("#B1B1B1");
 
-         var labelEvery = Math.floor(entries.length / 10);
+         var labelEvery = Math.floor(entries.length / 8);
          vis.add(pv.Rule)                               // Add the X-ticks
             .data(entries)
             .visible(function(d) {return d.term;})
@@ -379,8 +394,8 @@ var Donut = function(dom_id) {
         });
         // console.log('Drawing', entries, values);
 
-        var w = 200,                                    // Dimensions and color scheme for the chart
-            h = 200,
+        var w = 150,                                    // Dimensions and color scheme for the chart
+            h = 150,
             colors = pv.Colors.category10().range();
 
         var vis = new pv.Panel()                        // Create the basis panel
