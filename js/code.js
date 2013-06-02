@@ -226,8 +226,11 @@ var Timeline = function(dom_id) {
         var w = 600,                                    // Set-up dimensions and scales for the chart
             h = 200,
             max = pv.max(entries, function(d) {return d.count;}),
+            min = pv.min(entries, function(d) {return d.count;}),
+            top = max + (max - min) * 0.1,
+            bottom = min - (max - min) * 0.1,
             x = pv.Scale.linear(0, entries.length-1).range(0, w),
-            y = pv.Scale.linear(0, max).range(0, h);
+            y = pv.Scale.linear(top, bottom).range(0, h);
 
         var vis = new pv.Panel()                        // Create the basis panel
             .width(w)
