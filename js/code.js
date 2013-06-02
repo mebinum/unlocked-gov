@@ -406,9 +406,9 @@ var Donut = function(dom_id) {
         vis.add(pv.Wedge)                               // Create the "wedges" of the chart
             .def("active", -1)                          // Auxiliary variable to hold mouse over state
             .data( pv.normalize(values) )               // Pass the normalized data to Protovis
-            .left(w/3)                                  // Set-up chart position and dimension
-            .top(w/3)
-            .outerRadius(w/3)
+            .left(w/2)                                  // Set-up chart position and dimension
+            .top(w/2)
+            .outerRadius(w/2)
             .innerRadius(15)                            // Create a "donut hole" in the center
             .angle( function(d) {                       // Compute the "width" of the wedge
                 return d * 2 * Math.PI;
@@ -449,11 +449,11 @@ var Donut = function(dom_id) {
                 return (d*100).toFixed(1)               // add pixels for percents
                               .toString().length*4 +
                        10 +                             // add pixels for glyphs (%, etc)
-                       entries[this.index]              // add pixels for letters (very rough)
-                           .term.length*9;
+                       entries[this.index].term.length*6 +
+                       entries[this.index].count.toString().length*7;
             })
             .height(28)
-            .top((w/3)-14)
+            .top((w/2)-14)
 
             .anchor("right").add(pv.Dot)                // Add the right part of the label
             .fillStyle("#222")
@@ -463,7 +463,7 @@ var Donut = function(dom_id) {
 
             .parent.children[2].anchor("left")          // Add the text to label
                    .add(pv.Label)
-            .left((w/3)-7)
+            .left((w/2)-7)
             .text(function(d) {                         // Combine the text for label
                 return (d*100).toFixed(1) + "%" +
                        ' ' + entries[this.index].term +
