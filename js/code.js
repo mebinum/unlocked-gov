@@ -12,7 +12,7 @@ jQuery(document).ready(function($) {
     saveResultsCsvButton: '#download-dataset-button-csv',
     facets: [
         {'field':'event_date', 'display': 'Date'},
-        {'field':'event_year', 'display': 'Year'},
+        {'field':'event_year', 'display': 'Year', 'size': 18},
         {'field':'state', 'display': 'State'},
         {'field':'area', 'display': 'Area'}, 
         {'field':'lga_name', 'display': 'Local Gov Area (LGA)'},
