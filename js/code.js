@@ -353,14 +353,8 @@ var Timeline = function(dom_id) {
                return this.parent.children[0]           // its segment is active
                           .active() == this.index;
             })
-           .left(function(d) { return x(this.index);})
-           .bottom(function(d) { 
-              if (y(d.count) > (h / 2)) {
-                return (dotRadius);
-              } else {
-                return h - (dotRadius);
-              }
-           })
+           .left(function(d) { return x(this.index); })
+           .bottom(function(d) { return y(d.count); })
            .fillStyle("#33A3E1")
            .lineWidth(0)
            .radius(dotRadius)
