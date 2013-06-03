@@ -341,7 +341,7 @@ var Timeline = function(dom_id) {
            })
 
            .anchor("top").add(pv.Line)                  // Add thick stroke to the chart
-           .lineWidth(3)
+           .lineWidth(1)
            .strokeStyle('#33A3E1')
 
            .anchor("top").add(pv.Dot)                   // Add the circle "label" displaying
@@ -355,7 +355,7 @@ var Timeline = function(dom_id) {
            .bottom(function(d) { return y(d.count); })
            .fillStyle("#33A3E1")
            .lineWidth(0)
-           .radius(14)
+           .radius(16)
 
            .anchor("center").add(pv.Label)             // Add text to the label
            .text(function(d) {return d.count;})
