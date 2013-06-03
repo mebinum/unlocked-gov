@@ -247,6 +247,8 @@ var Timeline = function(dom_id) {
             x = pv.Scale.linear(0, entries.length-1).range(0, w),
             y = pv.Scale.linear(bottom, top).range(0, h);
 
+        var dotRadius = 16;
+
         var vis = new pv.Panel()                        // Create the basis panel
             .width(w)
             .height(h)
@@ -351,11 +353,17 @@ var Timeline = function(dom_id) {
                return this.parent.children[0]           // its segment is active
                           .active() == this.index;
             })
-           .left(function(d) { return x(this.index); })
-           .bottom(function(d) { return y(d.count); })
+           .left(function(d) { return x(this.index);})
+           .bottom(function(d) { 
+              if (y(d.count) > (h / 2)) {
+                return (dotRadius);
+              } else {
+                return h - (dotRadius);
+              }
+           })
            .fillStyle("#33A3E1")
            .lineWidth(0)
-           .radius(16)
+           .radius(dotRadius)
 
            .anchor("center").add(pv.Label)             // Add text to the label
            .text(function(d) {return d.count;})
