@@ -1154,7 +1154,7 @@ search box - the end user will not know they are happening.
             // augment the URL bar if possible
             if ( options.pushstate ) {
                 var currurl = '?source=' + options.querystring;
-                window.history.pushState("","search",currurl);
+                window.History.pushState(null, null, currurl);
             };
             $.ajax({
                 type: "get",
