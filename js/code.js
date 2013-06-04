@@ -12,7 +12,7 @@ jQuery(document).ready(function($) {
     saveResultsCsvButton: '#download-dataset-button-csv',
     facets: [
         {'field':'event_date', 'display': 'Date'},
-        {'field':'event_year', 'display': 'Year'},
+        {'field':'event_year', 'display': 'Year', 'size': 18},
         {'field':'state', 'display': 'State'},
         {'field':'area', 'display': 'Area'}, 
         {'field':'lga_name', 'display': 'Local Gov Area (LGA)'},
@@ -247,6 +247,8 @@ var Timeline = function(dom_id) {
             x = pv.Scale.linear(0, entries.length-1).range(0, w),
             y = pv.Scale.linear(bottom, top).range(0, h);
 
+        var dotRadius = 16;
+
         var vis = new pv.Panel()                        // Create the basis panel
             .width(w)
             .height(h)
@@ -341,7 +343,7 @@ var Timeline = function(dom_id) {
            })
 
            .anchor("top").add(pv.Line)                  // Add thick stroke to the chart
-           .lineWidth(3)
+           .lineWidth(1)
            .strokeStyle('#33A3E1')
 
            .anchor("top").add(pv.Dot)                   // Add the circle "label" displaying
@@ -355,7 +357,7 @@ var Timeline = function(dom_id) {
            .bottom(function(d) { return y(d.count); })
            .fillStyle("#33A3E1")
            .lineWidth(0)
-           .radius(14)
+           .radius(dotRadius)
 
            .anchor("center").add(pv.Label)             // Add text to the label
            .text(function(d) {return d.count;})
