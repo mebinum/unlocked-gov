@@ -184,6 +184,70 @@ box-shadow: none;
   color: #34495e;
 }
 
+#about {
+  background-color: #ECF0F1;
+}
+
+.info {
+  padding: 2px 25px;
+}
+.bio{
+  margin: 0 0 10px;
+}
+
+.connect{
+  margin-top:5px;
+}
+
+.connect ul {
+  list-style: none;
+  overflow: hidden;
+  margin: 0px;
+}
+
+.connect li {
+  margin: 0px;
+  padding: 0px;
+  float: left;
+}
+.connect li a {
+display: block;
+}
+
+.connect li a span {
+display: none;
+line-height: 0;
+}
+
+a.btn-success {
+  text-decoration: none;
+}
+
+a.linkedIn {
+  background-image: url('../images/social/linkedin.png');
+   background-size: 40px 40px;
+  width: 40px;
+  height: 40px;
+}
+
+a.twitter {
+  background-image: url('../images/social/twitter.png');
+  background-size: 40px 40px;
+  width: 40px;
+  height: 40px;
+}
+
+.title-header h1{
+  display: inline-block
+}
+
+#team .row {
+  margin-left:0px;
+}
+
+#team .row .span4{
+  margin-right:20px;
+}
 
 .media-object { width: 64px; height: 64px; padding-bottom: 30px }
 
