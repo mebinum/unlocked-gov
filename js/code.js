@@ -94,6 +94,14 @@ jQuery(document).ready(function($) {
     },
     on_results_returned: function(sdata) {
       Donut('graph-area').data(sdata.facets.area.terms).draw();
+
+      // remove blank sub-category
+      for (var i = 0; i < sdata.facets.subcategory.terms.length; i++) {
+        if (sdata.facets.subcategory.terms[i].term === "") {
+          sdata.facets.subcategory.terms.splice(i, 1);
+          i -= 1;
+        }
+      }
       Donut('graph-sub-category').data(sdata.facets.subcategory.terms).draw();
 
       var count_data = [];
