@@ -478,11 +478,11 @@ var Donut = function(dom_id) {
             .anchor("center").add(pv.Bar)               // Add the middle part of the label
             .fillStyle("#222")
             .width(function(d) {                        // Compute width:
-                return (d*100).toFixed(1)               // add pixels for percents
-                              .toString().length*4 +
-                       10 +                             // add pixels for glyphs (%, etc)
-                       entries[this.index].term.length*6 +
-                       entries[this.index].count.toString().length*7;
+              var text = (d*100).toFixed(1) + "%" +
+                       ' ' + entries[this.index].term +
+                       ' (' + values[this.index] + ')';
+
+              return text.length * 5;
             })
             .height(28)
             .top((w/2)-14)
