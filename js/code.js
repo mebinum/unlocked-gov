@@ -5,7 +5,7 @@
   var searchIndex = 'nswcrime';
 
 jQuery(document).ready(function($) {
-  $('.facet-view-simple').facetview({
+  var facetView = $('.facet-view-simple').facetview({
     search_url: serverUrl,
     search_index: searchIndex,
     saveResultsJsonButton: '#download-dataset-button-json',
@@ -93,7 +93,11 @@ jQuery(document).ready(function($) {
       size: 10
     },
     on_results_returned: function(sdata) {
-      Donut('graph-area').data(sdata.facets.area.terms).draw();
+      Donut('graph-area').data(sdata.facets.area.terms).
+        draw().
+        mouseDown(function(term) {
+          facetView.clickFilterChoice(null, 'area', term.term, true);
+        });
 
       // remove blank sub-category
       for (var i = 0; i < sdata.facets.subcategory.terms.length; i++) {
@@ -102,7 +106,11 @@ jQuery(document).ready(function($) {
           i -= 1;
         }
       }
-      Donut('graph-sub-category').data(sdata.facets.subcategory.terms).draw();
+      Donut('graph-sub-category').data(sdata.facets.subcategory.terms).
+        draw().
+        mouseDown(function(term) {
+          facetView.clickFilterChoice(null, 'subcategory', term.term, true);
+        });
 
       var count_data = [];
       for (var i = 0; i < sdata.facets.histo2.entries.length; i++) {
@@ -388,6 +396,13 @@ var Donut = function(dom_id) {
         dom_id = 'chart';
     }
 
+    var _mouseDown;
+
+    var mouseDown = function(callback) {
+      _mouseDown = callback;
+      return this;
+    }
+
     var data = function(json) {                         // Set the data for the chart
         this.data = json;
         return this;
@@ -437,8 +452,11 @@ var Donut = function(dom_id) {
             })
 
             .event("mousedown", function(d) {           // On "mouse down", perform action,
-                var term = entries[this.index].term;    // such as filtering the results...
-                return (alert("Filter the results by '"+term+"'"));
+                if (_mouseDown) {
+                  _mouseDown(entries[this.index]);
+                }
+                //var term = entries[this.index].term;    // such as filtering the results...
+                //return (alert("Filter the results by '"+term+"'"));
             })
 
 
@@ -483,11 +501,14 @@ var Donut = function(dom_id) {
 
             .root.canvas(dom_id)                        // Bind the chart to DOM element
             .render();                                  // And render it.
+
+          return this;
     };
 
     return {                                            // Create the public API
-        data   : data,
-        draw   : draw
+        data      : data,
+        draw      : draw,
+        mouseDown : mouseDown
     };
 
 };

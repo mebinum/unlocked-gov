@@ -668,7 +668,7 @@ search box - the end user will not know they are happening.
 
         // trigger a search when a filter choice is clicked
         // or when a source param is found and passed on page load
-        var clickfilterchoice = function(event,rel,href) {
+        var clickfilterchoice = function(event,rel,href,doSearch) {
             if ( event ) {
                 event.preventDefault();
                 var rel = $(this).attr("rel");
@@ -694,7 +694,7 @@ search box - the end user will not know they are happening.
 
             $('.facetview_filterselected', obj).unbind('click',clearfilter);
             $('.facetview_filterselected', obj).bind('click',clearfilter);
-            if ( event ) {
+            if ( event || doSearch) {
                 options.paging.from = 0;
                 dosearch();
             };
@@ -1453,7 +1453,7 @@ search box - the end user will not know they are happening.
 
         // ===============================================
         // now create the plugin on the page
-        return this.each(function() {
+        this.each(function() {
             // get this object
             obj = $(this);
             
@@ -1536,7 +1536,9 @@ search box - the end user will not know they are happening.
 
         }); // end of the function  
 
-
+        return {
+            clickFilterChoice: clickfilterchoice
+        }
     };
 
 
