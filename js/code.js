@@ -96,7 +96,9 @@ jQuery(document).ready(function($) {
       Donut('graph-area').data(sdata.facets.area.terms).
         draw().
         mouseDown(function(term) {
-          facetView.clickFilterChoice(null, 'area', term.term, true);
+          if (sdata.facets.area.terms.length > 1) {
+            facetView.clickFilterChoice(null, 'area', term.term, true);
+          }
         });
 
       // remove blank sub-category
@@ -109,7 +111,9 @@ jQuery(document).ready(function($) {
       Donut('graph-sub-category').data(sdata.facets.subcategory.terms).
         draw().
         mouseDown(function(term) {
-          facetView.clickFilterChoice(null, 'subcategory', term.term, true);
+          if (sdata.facets.subcategory.terms.length > 1) {
+            facetView.clickFilterChoice(null, 'subcategory', term.term, true);
+          }
         });
 
       var count_data = [];
