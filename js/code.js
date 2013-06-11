@@ -340,7 +340,7 @@ var Timeline = function(dom_id) {
                return this.root.render();
            })
 
-           .event("mousedown", function(d) {            // On "mouse down", perform action,
+           /*.event("mousedown", function(d) {            // On "mouse down", perform action,
                var date = new Date(d.term); 
                var time = [
                      date.getDate(),
@@ -348,7 +348,7 @@ var Timeline = function(dom_id) {
                      date.getFullYear()
                  ].join('/')  // eg filtering the results...
                return (alert("Timestamp: '"+time+"'"));
-           })
+           })*/
 
            .anchor("top").add(pv.Line)                  // Add thick stroke to the chart
            .lineWidth(1)
